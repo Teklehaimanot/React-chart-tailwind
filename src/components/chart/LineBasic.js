@@ -90,7 +90,13 @@ const LineBasic = ({ testData, yearRange }) => {
       }}
       className="flex  border-b border-pink-light text-gray-600"
     >
-      <div className="mr-4 flex justify-between  w-1/5 bg-pink-light  text-pink opacity-60  ">
+      <div
+        style={{
+          backgroundColor: active ? '#c6d7c7' : '',
+          color: active ? '#045d0b' : '',
+        }}
+        className="mr-4 flex justify-between  w-1/5 bg-pink-light  text-pink opacity-60  "
+      >
         <p className="px-5 py-6">{testData[0]['lab/name']}</p>
         <div className="text-dark flex-col justify-between">
           <div className="h-1/4 ">{max}</div>

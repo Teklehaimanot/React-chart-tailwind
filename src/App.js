@@ -7,6 +7,7 @@ import { testLabData } from './data';
 
 function App() {
   const [data, setData] = useState(testLabData);
+  const [toggle, setToggle] = useState(true);
 
   const underOneYear = data.filter((d) => {
     const ageInSeconds =
@@ -42,6 +43,8 @@ function App() {
   return (
     <div className="flex-col justify-center App  rounded-lg m-4 shadow-lg bg-white border border-gray-light ">
       <Header
+        onToggle={() => setToggle(!toggle)}
+        toggle={toggle}
         onOneYear={() => setData((prev) => (prev = underOneYear))}
         onSixMonths={() => setData(underSixMonths)}
         onThreeMonths={() => setData(underThreeMOnths)}
@@ -49,7 +52,7 @@ function App() {
       />
       <div className="block rounded-lg m-4 shadow-lg bg-white border border-gray-light  text-center">
         <AxisHorizontal data={data} />
-        <Charts data={data} yearRange={yearRange} />
+        {toggle ? <Charts data={data} yearRange={yearRange} /> : 'Table View'}
       </div>
     </div>
   );

@@ -51,7 +51,7 @@ const AxisHorizontal = ({ data }) => {
         LAB/ METRICS
       </div>
       <div style={{ width: `${width}%`, height: `${height}vh` }}>
-        <Line data={labData} options={options} />
+        <Line data={labData} options={options} key={Math.random()} />
       </div>
     </div>
   );

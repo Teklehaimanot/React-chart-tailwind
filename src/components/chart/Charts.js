@@ -16,7 +16,11 @@ const Charts = ({ data, yearRange }) => {
   return (
     <>
       {dataByLabName.map((labData, i) => (
-        <LineBasic key={i} testData={labData} yearRange={yearRange} />
+        <LineBasic
+          key={Math.random()}
+          testData={labData}
+          yearRange={yearRange}
+        />
       ))}
     </>
   );

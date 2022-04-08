@@ -1,7 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 
-const Header = ({ onOneYear, onSixMonths, onThreeMonths, onAlltimes }) => {
+const Header = ({
+  onOneYear,
+  onSixMonths,
+  onThreeMonths,
+  onAlltimes,
+  toggle,
+  onToggle,
+}) => {
   const [active, setActive] = useState([false, false, false, true]);
   return (
     <div>
@@ -55,10 +62,18 @@ const Header = ({ onOneYear, onSixMonths, onThreeMonths, onAlltimes }) => {
         <div className="flex-col">
           <h1 className="m-4 ">Display:</h1>
           <div className="flex justify-center rounded-lg text-lg" role="group">
-            <button className="bg-white text-gray font-bold hover:hover:text-dark font:bold border border border-gray-light rounded-l-lg px-6 py-3 mx-0 outline-none focus:shadow-outline">
+            <button
+              style={{ color: toggle ? '#222' : 'gray' }}
+              onClick={onToggle}
+              className="bg-white text-gray font-bold hover:hover:text-dark font:bold border border border-gray-light rounded-l-lg px-6 py-3 mx-0 outline-none focus:shadow-outline"
+            >
               charts
             </button>
-            <button className="bg-white text-gray font-bold hover:hover:text-dark font:bold border border-l-0 border-gray-light rounded-r-lg px-6 py-3 mx-0 outline-none focus:shadow-outline">
+            <button
+              style={{ color: !toggle ? '#222' : 'gray' }}
+              onClick={onToggle}
+              className="bg-white text-gray font-bold hover:hover:text-dark font:bold border border-l-0 border-gray-light rounded-r-lg px-6 py-3 mx-0 outline-none focus:shadow-outline"
+            >
               values
             </button>
           </div>
