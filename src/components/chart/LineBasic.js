@@ -7,7 +7,7 @@ import { Chart as ChartJS } from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import { timeYears } from 'd3';
 const LineBasic = ({ testData }) => {
-  const [width, setWidth] = useState(600);
+  const [width, setWidth] = useState(77);
   const [height, setHeight] = useState(11);
   const [active, setActive] = useState(false);
   console.log(testData);
@@ -87,7 +87,7 @@ const LineBasic = ({ testData }) => {
           <div className="h-1/4">{min}</div>
         </div>
       </div>
-      <div style={{ width: '77%', height: `${height}vh` }}>
+      <div style={{ width: `${width}%`, height: `${height}vh` }}>
         <Line data={labData} options={options} />
       </div>
     </div>
