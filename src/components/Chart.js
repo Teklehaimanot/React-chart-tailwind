@@ -39,7 +39,7 @@ const Chart = () => {
     DrawChart(sample, dimensions);
   }, [dimensions]);
 
-  const margin = { top: 50, right: 30, bottom: 30, left: 60 };
+  const margin = { top: 100, right: 30, bottom: 30, left: 60 };
 
   function DrawChart(data, dimensions) {
     // console.log(dimensions.width, dimensions.height)

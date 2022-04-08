@@ -1,123 +1,76 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { CgArrowsVAlt } from 'react-icons/cg';
-import * as d3 from 'd3';
-import { useState, useRef } from 'react';
+// import * as d3 from 'd3';
+import { useState } from 'react';
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS } from 'chart.js/auto';
+import 'chartjs-adapter-date-fns';
+import { timeYears } from 'd3';
 const LineBasic = ({ testData }) => {
-  const myRef = useRef(null);
   const [width, setWidth] = useState(600);
-  const [height, setHeight] = useState(60);
+  const [height, setHeight] = useState(11);
   const [active, setActive] = useState(false);
+  console.log(testData);
+  const [labData, setLabData] = useState({
+    labels: testData.map((data) => new Date(data['lab/when'])),
+    datasets: [
+      {
+        data: testData.map((data) => data['lab/value']),
+        backgroundColor: '#222',
+        borderColor: 'black',
+        borderWidth: 2,
+      },
+    ],
+  });
+
+  const [options, setOptions] = useState({
+    scales: {
+      x: {
+        type: 'time',
+        grid: {
+          display: false,
+
+          drawBorder: false,
+        },
+        ticks: {
+          display: false,
+        },
+      },
+      y: {
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+        ticks: {
+          display: false,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    maintainAspectRatio: false,
+  });
+
   const min = Math.min.apply(
     Math,
     testData.map(function (o) {
-      return o['lab/value'] - 1;
+      return o['lab/value'];
     })
   );
   const max = Math.max.apply(
     Math,
     testData.map(function (o) {
-      return o['lab/value'] + 1;
+      return o['lab/value'];
     })
   );
 
-  useEffect(() => {
-    drawChart();
-  }, [height]);
-
   const handleClick = () => {
-    active ? setHeight(height / 2) : setHeight(2 * height);
+    active ? setHeight(height / 3) : setHeight(3 * height);
   };
-  const drawChart = () => {
-    const dataset = testData;
-    const svg = d3.select(myRef.current);
-    const margin = 0;
-    const width = svg.attr('width') - margin;
-    const height = svg.attr('height') - margin;
-    const xScale = d3.scaleLinear().domain([2015, 2023]).range([0, width]),
-      yScale = d3.scaleLinear().domain([min, max]).range([height, 0]);
 
-    const g = svg
-      .append('g')
-      .attr('transform', 'translate(' + 0 + ',' + 0 + ')');
-
-    // svg
-    //   .append('text')
-    //   .attr('x', width / 2 + 100)
-    //   .attr('y', 100)
-    //   .attr('text-anchor', 'middle')
-    //   .style('font-family', 'Helvetica')
-    //   .style('font-size', 20);
-    //   .text('Line Chart');
-
-    // X label
-    // svg
-    //   .append('text')
-    //   .attr('x', width / 2 + 100)
-    //   .attr('y', height - 50)
-    //   .attr('text-anchor', 'middle')
-    //   .style('font-family', 'Helvetica')
-    //   .style('font-size', 12)
-    //   .text('Independant');
-
-    // Y label
-    // svg
-    //   .append('text')
-    //   .attr('text-anchor', 'middle')
-    //   .attr('transform', 'translate(60,' + height + ')rotate(-90)')
-    //   .style('font-family', 'Helvetica')
-    //   .style('font-size', 12)
-    //   .text('Dependant');
-
-    // Step 6
-    // g.append('g').attr('transform', 'translate(0,' + 0 + ')');
-    //   .call(d3.axisTop(xScale));
-
-    // g.append('g').call(d3.axisLeft(yScale));
-
-    // Step 7
-    svg
-      .append('g')
-      .selectAll('dot')
-      .data(dataset)
-      .enter()
-      .append('circle')
-      .attr('cx', function (d, i) {
-        return xScale(
-          new Date(d['lab/when']).getFullYear() +
-            new Date(d['lab/when']).getMonth() / 10
-        );
-      })
-      .attr('cy', function (d) {
-        return yScale(d['lab/value']);
-      })
-      .attr('r', 3)
-      //   .attr('transform', 'translate(' + 150 + ',' + 30 + ')')
-      .style('fill', 'black');
-
-    // Step 8
-    const line = d3
-      .line()
-      .x(function (d) {
-        return xScale(
-          new Date(d['lab/when']).getFullYear() +
-            new Date(d['lab/when']).getMonth() / 10
-        );
-      })
-      .y(function (d) {
-        return yScale(d['lab/value']);
-      });
-    //   .curve(d3.curveMonotoneX);
-
-    svg
-      .append('path')
-      .datum(dataset)
-      .attr('class', 'line')
-      //   .attr('transform', 'translate(' + 150 + ',' + 30 + ')')
-      .attr('d', line)
-      .style('fill', 'none')
-      .style('stroke', 'black')
-      .style('stroke-width', '1');
-  };
   return (
     <div
       onClick={() => {
@@ -134,7 +87,9 @@ const LineBasic = ({ testData }) => {
           <div className="h-1/4">{min}</div>
         </div>
       </div>
-      <svg ref={myRef} width={width} height={height}></svg>
+      <div style={{ width: '77%', height: `${height}vh` }}>
+        <Line data={labData} options={options} />
+      </div>
     </div>
   );
 };

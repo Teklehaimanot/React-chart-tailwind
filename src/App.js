@@ -11,7 +11,7 @@ function App() {
     <div className="flex-col justify-center App  rounded-lg m-4 shadow-lg bg-white border border-gray-light ">
       <Header />
       <div className="block rounded-lg m-4 shadow-lg bg-white border border-gray-light  text-center">
-        <AxisHorizontal />
+        <AxisHorizontal data={data} />
         <Charts data={data} />
       </div>
     </div>
