@@ -4,7 +4,7 @@ import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-date-fns';
 
 const AxisHorizontal = ({ data }) => {
-  const [width, setWidth] = useState(70);
+  const [width, setWidth] = useState(77);
   const [height, setHeight] = useState(11);
   const [labData, setLabData] = useState({
     labels: data.map((data) => new Date(data['lab/when'])),

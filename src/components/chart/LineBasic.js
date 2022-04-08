@@ -5,12 +5,10 @@ import { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
-import { timeYears } from 'd3';
-const LineBasic = ({ testData }) => {
+const LineBasic = ({ testData, yearRange }) => {
   const [width, setWidth] = useState(77);
   const [height, setHeight] = useState(11);
   const [active, setActive] = useState(false);
-  console.log(testData);
   const [labData, setLabData] = useState({
     labels: testData.map((data) => new Date(data['lab/when'])),
     datasets: [
@@ -67,6 +65,19 @@ const LineBasic = ({ testData }) => {
     })
   );
 
+  const minYear = Math.min.apply(
+    Math,
+    testData.map(function (o) {
+      return parseInt(o['lab/when']);
+    })
+  );
+  const maxYear = Math.max.apply(
+    Math,
+    testData.map(function (o) {
+      return parseInt(o['lab/when']);
+    })
+  );
+
   const handleClick = () => {
     active ? setHeight(height / 3) : setHeight(3 * height);
   };
@@ -87,7 +98,12 @@ const LineBasic = ({ testData }) => {
           <div className="h-1/4">{min}</div>
         </div>
       </div>
-      <div style={{ width: `${width}%`, height: `${height}vh` }}>
+      <div
+        style={{
+          width: `${width * ((maxYear - minYear) / yearRange)}%`,
+          height: `${height}vh`,
+        }}
+      >
         <Line data={labData} options={options} />
       </div>
     </div>

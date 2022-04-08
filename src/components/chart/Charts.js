@@ -1,8 +1,7 @@
 import React from 'react';
 import LineBasic from './LineBasic';
-import { useState } from 'react';
 
-const Charts = ({ data }) => {
+const Charts = ({ data, yearRange }) => {
   const groupBy = (key) => (array) =>
     array.reduce(
       (objectsByKeyValue, obj) => ({
@@ -16,8 +15,8 @@ const Charts = ({ data }) => {
 
   return (
     <>
-      {dataByLabName.map((labData) => (
-        <LineBasic testData={labData} />
+      {dataByLabName.map((labData, i) => (
+        <LineBasic key={i} testData={labData} yearRange={yearRange} />
       ))}
     </>
   );
