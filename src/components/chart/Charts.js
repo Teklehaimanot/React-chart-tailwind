@@ -1,7 +1,9 @@
 import React from 'react';
 import LineBasic from './LineBasic';
+import Table from './Table';
+// import { Table } from './Table';
 
-const Charts = ({ data, yearRange }) => {
+const Charts = ({ data, yearRange, toggle }) => {
   const groupBy = (key) => (array) =>
     array.reduce(
       (objectsByKeyValue, obj) => ({
@@ -15,13 +17,17 @@ const Charts = ({ data, yearRange }) => {
 
   return (
     <>
-      {dataByLabName.map((labData, i) => (
-        <LineBasic
-          key={Math.random()}
-          testData={labData}
-          yearRange={yearRange}
-        />
-      ))}
+      {dataByLabName.map((labData, i) =>
+        toggle ? (
+          <LineBasic
+            key={Math.random()}
+            testData={labData}
+            yearRange={yearRange}
+          />
+        ) : (
+          <Table key={i} testData={labData} yearRange={yearRange} />
+        )
+      )}
     </>
   );
 };

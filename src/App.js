@@ -4,7 +4,6 @@ import AxisHorizontal from './components/axis/AxisHorizontal';
 import Header from './components/header/Header';
 import Charts from './components/chart/Charts';
 import { testLabData } from './data';
-
 function App() {
   const [data, setData] = useState(testLabData);
   const [toggle, setToggle] = useState(true);
@@ -50,9 +49,12 @@ function App() {
         onThreeMonths={() => setData(underThreeMOnths)}
         onAlltimes={() => setData(testLabData)}
       />
-      <div className="block rounded-lg m-4 shadow-lg bg-white border border-gray-light  text-center">
+      <div
+        key={Math.random()}
+        className="block rounded-lg m-4 shadow-lg bg-white border border-gray-light  text-center"
+      >
         <AxisHorizontal data={data} />
-        {toggle ? <Charts data={data} yearRange={yearRange} /> : 'Table View'}
+        <Charts data={data} yearRange={yearRange} toggle={toggle} />
       </div>
     </div>
   );

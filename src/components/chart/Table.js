@@ -2,10 +2,10 @@ import React from 'react';
 import { CgArrowsVAlt } from 'react-icons/cg';
 // import * as d3 from 'd3';
 import { useState } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
-const LineBasic = ({ testData, yearRange }) => {
+const Table = ({ testData, yearRange }) => {
   const [width, setWidth] = useState(77);
   const [height, setHeight] = useState(11);
   const [active, setActive] = useState(false);
@@ -14,16 +14,18 @@ const LineBasic = ({ testData, yearRange }) => {
     datasets: [
       {
         data: testData.map((data) => data['lab/value']),
-        backgroundColor: '#222',
-        borderColor: 'black',
+        backgroundColor: 'pink',
+        borderColor: 'pink',
         borderWidth: 2,
       },
     ],
   });
 
   const [options, setOptions] = useState({
+    responsive: true,
     scales: {
       x: {
+        // stacked: true,
         type: 'time',
         grid: {
           display: false,
@@ -35,6 +37,7 @@ const LineBasic = ({ testData, yearRange }) => {
         },
       },
       y: {
+        // stacked: true,
         grid: {
           display: false,
           drawBorder: false,
@@ -110,10 +113,10 @@ const LineBasic = ({ testData, yearRange }) => {
           height: `${height}vh`,
         }}
       >
-        <Line data={labData} options={options} />
+        <Bar data={labData} options={options} />
       </div>
     </div>
   );
 };
 
-export default LineBasic;
+export default Table;
