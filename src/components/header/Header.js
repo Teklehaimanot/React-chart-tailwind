@@ -13,7 +13,7 @@ const Header = ({
   return (
     <div>
       <h2 className="p-4">Tracking Labs and Disease Metrics</h2>
-      <div className="flex justify-between m-4">
+      <div className="flex flex-wrap justify-between m-4">
         <div className="flex-col">
           <h1 className="m-4 ">View By:</h1>
           <div className="flex justify-center rounded-lg text-lg" role="group">

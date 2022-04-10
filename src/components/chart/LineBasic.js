@@ -102,7 +102,7 @@ const LineBasic = ({ testData, yearRange }) => {
         }}
         className="mr-4 flex justify-between  w-1/5 bg-pink-light  text-pink opacity-60  "
       >
-        <p className="px-5 py-6">{testData[0]['lab/name']}</p>
+        <p className="sm  py-6">{testData[0]['lab/name']}</p>
         <div className="text-dark flex-col justify-between">
           <div className="h-1/4 ">{max}</div>
           <CgArrowsVAlt className="h-1/2" />
