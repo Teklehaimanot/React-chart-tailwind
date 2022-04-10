@@ -40,7 +40,7 @@ function App() {
   );
   const yearRange = max - min;
   return (
-    <div className="flex-col justify-center App  rounded-lg m-4 shadow-lg bg-white border border-gray-light ">
+    <div className="flex-col justify-center lg:w-1/2 md:w-1/2 sm:w-1 App  rounded-lg m-4 shadow-lg bg-white border border-gray-light ">
       <Header
         onToggle={() => setToggle(!toggle)}
         toggle={toggle}

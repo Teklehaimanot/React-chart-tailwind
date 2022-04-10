@@ -16,10 +16,10 @@ body {
     font-size: 1.4rem;
     line-height: 1.7rem;
     font-weight: 400;
-    /* background-color: #d3dce6; */
 }
 
-.App {
-    width: 50%;
-    margin: 5% 25%;
+@media (min-width: 680px) {
+    .App {
+        margin: 5% 25%;
+    }
 }
