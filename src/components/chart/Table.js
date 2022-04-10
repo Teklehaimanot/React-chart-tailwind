@@ -53,14 +53,14 @@ const Table = ({ testData, yearRange }) => {
       },
     },
     plugins: {
-      tooltip: {
-        // enabled: false,
-      },
       legend: {
         display: false,
       },
     },
     maintainAspectRatio: false,
+    onAnimationComplete: new (function () {
+      //   alert('onAnimationComplete');
+    })(),
   });
 
   const [lab2Data, setLab2Data] = useState({
