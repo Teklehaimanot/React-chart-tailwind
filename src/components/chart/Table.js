@@ -2,7 +2,7 @@ import React from 'react';
 import { CgArrowsVAlt } from 'react-icons/cg';
 // import * as d3 from 'd3';
 import { useState } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 const Table = ({ testData, yearRange }) => {
@@ -14,18 +14,24 @@ const Table = ({ testData, yearRange }) => {
     datasets: [
       {
         data: testData.map((data) => data['lab/value']),
-        backgroundColor: 'pink',
-        borderColor: 'pink',
-        borderWidth: 2,
+        // backgroundColor: '#222',
+        borderColor: 'black',
+        borderWidth: 1,
+        showLine: false,
       },
     ],
   });
 
   const [options, setOptions] = useState({
-    responsive: true,
+    elements: {
+      point: {
+        pointStyle: 'rect',
+        radius: 15,
+        backgroundColor: 'pink',
+      },
+    },
     scales: {
       x: {
-        // stacked: true,
         type: 'time',
         grid: {
           display: false,
@@ -37,7 +43,57 @@ const Table = ({ testData, yearRange }) => {
         },
       },
       y: {
-        // stacked: true,
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+        ticks: {
+          display: false,
+        },
+      },
+    },
+    plugins: {
+      tooltip: {
+        // enabled: false,
+      },
+      legend: {
+        display: false,
+      },
+    },
+    maintainAspectRatio: false,
+  });
+
+  const [lab2Data, setLab2Data] = useState({
+    labels: testData.map((data) => new Date(data['lab/when'])),
+    datasets: [
+      {
+        data: testData.map((data) => data['lab/value']),
+        backgroundColor: '#045d0b',
+        borderColor: '#045d0b',
+        borderWidth: 2,
+      },
+    ],
+  });
+
+  const [options2, setOptions2] = useState({
+    elements: {
+      point: {
+        radius: 3,
+      },
+    },
+    scales: {
+      x: {
+        type: 'time',
+        grid: {
+          display: false,
+
+          drawBorder: false,
+        },
+        ticks: {
+          display: false,
+        },
+      },
+      y: {
         grid: {
           display: false,
           drawBorder: false,
@@ -113,7 +169,11 @@ const Table = ({ testData, yearRange }) => {
           height: `${height}vh`,
         }}
       >
-        <Bar data={labData} options={options} />
+        {active ? (
+          <Line data={lab2Data} options={options2} key={Math.random()} />
+        ) : (
+          <Line data={labData} options={options} key={Math.random()} />
+        )}
       </div>
     </div>
   );

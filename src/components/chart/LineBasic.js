@@ -22,6 +22,11 @@ const LineBasic = ({ testData, yearRange }) => {
   });
 
   const [options, setOptions] = useState({
+    elements: {
+      point: {
+        radius: 3,
+      },
+    },
     scales: {
       x: {
         type: 'time',
