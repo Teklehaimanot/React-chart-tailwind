@@ -44,7 +44,7 @@ function App() {
       <Header
         onToggle={() => setToggle(!toggle)}
         toggle={toggle}
-        onOneYear={() => setData((prev) => (prev = underOneYear))}
+        onOneYear={() => setData(underOneYear)}
         onSixMonths={() => setData(underSixMonths)}
         onThreeMonths={() => setData(underThreeMOnths)}
         onAlltimes={() => setData(testLabData)}
